@@ -1,5 +1,5 @@
 import React from "react";
-import { Github, Mail} from 'lucide-react';
+import { Github, Mail, Linkedin} from 'lucide-react';
 
 const Contact = () => (
     <section id="contact" className="py-20 bg-gray-50">
@@ -17,11 +17,20 @@ const Contact = () => (
               github.com/skanenje
             </a>
             <a 
-              href="mailto:your.email@example.com"
+              href="mailto:swapomuse@gmail.com"
               className="flex items-center text-gray-600 hover:text-blue-600 transition"
             >
               <Mail className="w-6 h-6 mr-3" />
-              your.email@example.com
+              swapomuse@gmail.com
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/swabri-musa-565350291/" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-gray-600 hover:text-blue-600 transition"
+            >
+              <Linkedin className="w-6 h-6 mr-3" />
+              https://www.linkedin.com/in/swabri-musa-565350291/
             </a>
           </div>
         </div>
