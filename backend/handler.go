@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -38,6 +39,7 @@ func (h *Handler) GetProjectByID(c *gin.Context) {
 func (h *Handler) GetGitHubProjects(c *gin.Context) {
 	projects, err := h.projectService.GetGitHubProjects()
 	if err != nil {
+		log.Printf("Error getting GitHub projects: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
