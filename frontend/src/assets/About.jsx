@@ -9,7 +9,7 @@ const About = () => {
         </h2>
         <div className="max-w-3xl mx-auto backdrop-blur-none bg-white/5 p-8 rounded-2xl shadow-xl">
           <p className="text-lg mb-6 text-gray-200 leading-relaxed">
-            Hi again! I'm Swabri, a passionate Go programmer with a keen interest in Web development.
+            Hi again! I'm an Apprentice Software Developer | Enthusiastic Problem Solver, a passionate Go programmer with a keen interest in Web development.
           </p>
           <p className="text-lg mb-6 text-gray-200 leading-relaxed">
             I have 7 months of experience in the language, specializing in web frameworks.

@@ -33,7 +33,7 @@ const Hero = () => (
     {/* Content Container */}
     <div className="relative z-10 text-center px-4 py-16 w-full max-w-4xl mx-auto">
       <h1 className="!text-5xl md:!text-7xl font-bold mb-6 text-white !leading-tight">
-        Hello, I'm <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#4158D0] to-[#C850C0]">SK</span>
+        Hello, I'm <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#4158D0] to-[#C850C0]">Swabri Kanenje</span>
       </h1>
       <p className="text-xl md:text-2xl !text-gray-200 mb-12 drop-shadow-lg">
         Full Stack Developer specializing in Go and React
