@@ -9,7 +9,7 @@ const Hero = () => (
     <div 
       className="absolute inset-0 bg-cover bg-center bg-fixed"
       style={{
-        backgroundImage: 'url("/images/kratos.png")',
+        backgroundImage: 'url("/images/IMG_1829.JPG")',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',

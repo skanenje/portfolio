@@ -25,6 +25,7 @@ func main() {
 	}
 	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
 	config.AllowHeaders = []string{"Origin", "Content-Type", "Accept"}
+	config.ExposeHeaders = []string{"Content-Length", "Content-Type", "Authorization"}
 	r.Use(cors.New(config))
 	r.GET("/api/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{
