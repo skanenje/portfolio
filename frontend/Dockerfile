@@ -1,19 +1,41 @@
 # Build stage
-FROM node:18-alpine as build
-
+FROM node:20-alpine AS build-stage
 WORKDIR /app
 
+# Copy package files
 COPY package*.json ./
-RUN npm ci
 
+# Install dependencies
+RUN npm install
+
+# Install react-icons explicitly
+RUN npm install react-icons
+
+# Copy source code
 COPY . .
-RUN npm run build
+
+# List contents of the directory
+RUN ls -la
+
+# Display Node.js and npm versions
+RUN node -v && npm -v
+
+# Display package.json content
+RUN cat package.json
+
+# Build the application with verbose output
+RUN npm run build --verbose
 
 # Final stage
-FROM nginx:alpine
+FROM nginx:alpine AS production-stage
 
-COPY --from=build /app/dist /usr/share/nginx/html
+# Copy built assets from builder stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+
+# Copy nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
+# Start Nginx server
 CMD ["nginx", "-g", "daemon off;"]

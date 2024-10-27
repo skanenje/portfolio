@@ -16,35 +16,32 @@ func main() {
 
 	r := gin.Default()
 
-	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{
-		"http://localhost:5173", // Vite default
-		"http://localhost:3000",
-		"http://localhost:4173", // In case you're using a different port
-		// In case you're using a different port
+	// More permissive CORS configuration
+	config := cors.Config{
+		AllowOrigins:     []string{"http://localhost:3000", "http://localhost:5173", "http://localhost:4173", "http://localhost"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization", "X-Requested-With"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * 3600,
 	}
-	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
-	config.AllowHeaders = []string{"Origin", "Content-Type", "Accept"}
-	config.ExposeHeaders = []string{"Content-Length", "Content-Type", "Authorization"}
+
 	r.Use(cors.New(config))
-	r.Static("/", "./dist")
 
 	r.GET("/api/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"status": "healthy",
 		})
 	})
-	handler := NewHandler()
 
+	handler := NewHandler()
 	api := r.Group("/api")
 	{
 		api.GET("/projects", handler.GetProjects)
 		api.GET("/projects/:id", handler.GetProjectByID)
 		api.GET("/github-projects", handler.GetGitHubProjects)
 	}
-	r.NoRoute(func(c *gin.Context) {
-        c.File("./dist/index.html")
-    })
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"

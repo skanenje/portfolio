@@ -1,14 +1,5 @@
 version: '3.8'
-
 services:
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: portfolio-frontend
-    volumes:
-      - frontend_dist:/app/dist
-
   backend:
     build:
       context: ./backend
@@ -19,16 +10,22 @@ services:
       - GITHUB_TOKEN=${GITHUB_TOKEN}
     ports:
       - "8080:8080"
-    volumes:
-      - frontend_dist:/root/dist
     networks:
       - portfolio-network
     restart: unless-stopped
-    depends_on:
-      - frontend
 
-volumes:
-  frontend_dist:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: portfolio-frontend
+    ports:
+      - "3000:80"  # Changed from "80:80" to "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - portfolio-network
+    restart: unless-stopped
 
 networks:
   portfolio-network:
