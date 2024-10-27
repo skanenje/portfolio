@@ -27,6 +27,8 @@ func main() {
 	config.AllowHeaders = []string{"Origin", "Content-Type", "Accept"}
 	config.ExposeHeaders = []string{"Content-Length", "Content-Type", "Authorization"}
 	r.Use(cors.New(config))
+	r.Static("/", "./dist")
+
 	r.GET("/api/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"status": "healthy",
@@ -40,7 +42,9 @@ func main() {
 		api.GET("/projects/:id", handler.GetProjectByID)
 		api.GET("/github-projects", handler.GetGitHubProjects)
 	}
-
+	r.NoRoute(func(c *gin.Context) {
+        c.File("./dist/index.html")
+    })
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
