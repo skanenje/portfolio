@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: portfolio-backend
-        image: portfolio-backend:latest
+        image: skanenje/portfolio-backend:latest
         ports:
         - containerPort: 8080
         env:
